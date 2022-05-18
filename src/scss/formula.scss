@@ -3,7 +3,7 @@
 
 .cells__formula {
   align-items: center;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid #c0c0c0;
   display: flex;
   left: 0;
   right: 0;
@@ -13,22 +13,27 @@
   overflow: hidden;
 
   .info {
-    border-right: 1px solid $border-color;
-    content: url(https://ssl.gstatic.com/docs/common/material_common_sprite374_grey_medium.svg);
+    border-right: 2px solid $border-light-color;
     font-size: 13px;
     font-style: italic;
     text-align: center;
-    position: absolute;
-    left: -43px;
-    top: -3457px;
-    opacity: 0.7;
     min-width: $row-number-width;
+    height: $formula-height - 6px;
+
+    .fx {
+      content: url(https://ssl.gstatic.com/docs/common/material_common_sprite374_grey_medium.svg);
+      position: absolute;
+      left: -43px;
+      top: -3457px;
+      opacity: 0.7;
+      padding-right: 2px;
+    }
   }
 
   .input {
     font-size: 12px;
     outline: none;
-    padding: 4px 4px 4px $row-number-width;
+    padding: 4px;
     height: 100%;
     width: 100%;
   }
