@@ -1,3 +1,9 @@
+import {Cells} from '@/components/cells/Cells';
 import './scss/index.scss';
 
-console.log('Hello, mom!');
+
+const cells = new Cells('#app', {
+  components: [],
+});
+
+console.log('Cells:', cells);
