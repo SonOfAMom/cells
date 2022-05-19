@@ -8,110 +8,43 @@
 </head>
 <body>
     <div id="app" class="container">
-        <div class="cells">
 
-            <div class="cells__header">
-                <input type="text" class="title-input" value="New spreadsheet" />
-                <div>
-                    <div class="button">
-                        <span class="material-icons">
-                            delete_forever
-                        </span>
-                    </div>
+        <div class="dashboard">
+            <div class="dashboard__header">
+                <h1>Cells</h1>
+            </div>
 
-                    <div class="button">
-                        <span class="material-icons">
-                            exit_to_app
-                        </span>
-                    </div>
+            <div class="dashboard__new">
+                <div class="dashboard__view">
+                    <a href="#" class="dashboard__create">
+                        New spreadsheet
+                    </a>
                 </div>
             </div>
 
-            <div class="cells__toolbar">
-                <div class="button">
-                    <span class="material-icons">
-                        format_bold
-                    </span>
+            <div class="dashboard__list dashboard__view">
+                <div class="dashboard__list-header">
+                    <span>Name</span>
+                    <span>Last opened</span>
                 </div>
-                <div class="button">
-                    <span class="material-icons">
-                        format_italic
-                    </span>
-                </div>
-                <div class="button">
-                    <span class="material-icons">
-                        strikethrough_s
-                    </span>
-                </div>
-                <div class="button">
-                    <span class="material-icons">
-                        format_align_left
-                    </span>
-                </div>
-                <div class="button">
-                    <span class="material-icons">
-                        format_align_center
-                    </span>
-                </div>
-                <div class="button">
-                    <span class="material-icons">
-                        format_align_right
-                    </span>
-                </div>
+
+                <ul class="dashboard__list-content">
+                    <li class="dashboard__record">
+                        <a href="#">Business table 1</a>
+                        <strong>19.02.2022</strong>
+                    </li>
+                    <li class="dashboard__record">
+                        <a href="#">Business table 2</a>
+                        <strong>19.02.2022</strong>
+                    </li>
+                    <li class="dashboard__record">
+                        <a href="#">Business table 3</a>
+                        <strong>19.02.2022</strong>
+                    </li>
+                </ul>
             </div>
-
-            <div class="cells__formula">
-                <div class="info">
-                    <div class="fx"></div>
-                </div>
-                <div class="input" contenteditable spellcheck="false">
-
-                </div>
-            </div>
-
-            <div class="cells__table">
-                <div class="row">
-                    <div class="row-info"></div>
-                    <div class="row-data">
-                        <div class="column">
-                            A
-                        </div>
-                        <div class="column">
-                            B
-                        </div>
-                        <div class="column">
-                            C
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="row-info">
-                        1
-                    </div>
-
-                    <div class="row-data">
-                        <div class="cell">15</div>
-                        <div class="cell selected" contenteditable>23</div>
-                        <div class="cell">38</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="row-info">
-                        2
-                    </div>
-
-                    <div class="row-data">
-                        <div class="cell">15</div>
-                        <div class="cell">23</div>
-                        <div class="cell">38</div>
-                    </div>
-                </div>
-
-            </div>
-
         </div>
+
     </div>
 </body>
 </html>
