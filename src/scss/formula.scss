@@ -1,0 +1,40 @@
+@import "variables";
+@import "mixins";
+
+.cells__formula {
+  align-items: center;
+  border-bottom: 1px solid #c0c0c0;
+  display: flex;
+  left: 0;
+  right: 0;
+  top: $header-height + $toolbar-height;
+  height: $formula-height;
+  position: absolute;
+  overflow: hidden;
+
+  .info {
+    border-right: 2px solid $border-light-color;
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+    min-width: $row-number-width;
+    height: $formula-height - 6px;
+
+    .fx {
+      content: url(https://ssl.gstatic.com/docs/common/material_common_sprite374_grey_medium.svg);
+      position: absolute;
+      left: -43px;
+      top: -3457px;
+      opacity: 0.7;
+      padding-right: 2px;
+    }
+  }
+
+  .input {
+    font-size: 12px;
+    outline: none;
+    padding: 4px;
+    height: 100%;
+    width: 100%;
+  }
+}
