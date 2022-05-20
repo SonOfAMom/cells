@@ -1,7 +1,34 @@
-class Dom {}
+class Dom {
+  constructor(selector) {
+    this.$nativeElement = typeof selector === 'string' ?
+      document.querySelector(selector) :
+      selector;
+  }
 
-export function $() {
-  return new Dom();
+  html(html) {
+    if (typeof html === 'string') {
+      this.$nativeElement.innerHTML = html;
+      return this;
+    }
+    return this.$nativeElement.innerHTML;
+  }
+
+  clear() {
+    this.html('');
+    return this;
+  }
+
+  append(node) {
+    if (node instanceof Dom) {
+      node = node.$nativeElement;
+    }
+    this.$nativeElement.appendChild(node);
+    return this;
+  }
+}
+
+export function $(selector) {
+  return new Dom(selector);
 }
 
 $.create = (tagName, classes = '') => {
@@ -9,5 +36,5 @@ $.create = (tagName, classes = '') => {
   if (classes) {
     el.classList.add(classes);
   }
-  return el;
+  return $(el);
 };
