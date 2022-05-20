@@ -25,6 +25,10 @@ class Dom {
     this.$nativeElement.appendChild(node);
     return this;
   }
+
+  on(eventType, callback) {
+    this.$nativeElement.addEventListener(eventType, callback);
+  }
 }
 
 export function $(selector) {
