@@ -5,7 +5,9 @@
   left: 0;
   right: 0;
   top: $header-height + $toolbar-height + $formula-height;
-  overflow-x: auto;
+  height: calc(100vh - $header-height - $toolbar-height - $formula-height);
+  overflow-x: scroll;
+  overflow-y: scroll;
   position: absolute;
 
   .row {

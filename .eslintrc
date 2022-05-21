@@ -6,7 +6,9 @@
     "node": true
   },
   "rules": {
-
+    "linebreak-style": ["error", "windows"],
+    "require-jsdoc": "off",
+    "no-trailing-spaces": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
