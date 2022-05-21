@@ -12,10 +12,12 @@ export class DOMListener {
   initDOMListeners() {
     this.listeners.forEach((listener) => {
       const method = 'on' + capitalizeFirstLetter(listener);
-      // console.log(this);
-      // console.log(this['onInput']);
-      // console.log(this.onInput);
-      this.$root.on(listener, this[method]);
+      if (!this[method]) {
+        throw new Error(
+            `Method ${method} is not implemented in ${this.name} component.`
+        );
+      }
+      this.$root.on(listener, this[method].bind(this));
     });
   }
 

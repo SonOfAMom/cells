@@ -20,6 +20,12 @@ export class Formula extends CellsComponent {
   }
 
   onInput(event) {
-    console.log('Formula onInput event:', event);
+    console.log(this.$root);
+    console.log('Formula onInput event:', event.target.textContent.trim());
+  }
+
+  onClick(event) {
+    console.log(this.$root);
+    console.log('Formula onClick event:', event);
   }
 }
