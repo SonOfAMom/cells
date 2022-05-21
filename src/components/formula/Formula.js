@@ -10,15 +10,6 @@ export class Formula extends CellsComponent {
     });
   }
 
-  toHTML() {
-    return `
-      <div class="info">
-          <div class="fx"></div>
-      </div>
-      <div class="input" contenteditable spellcheck="false"></div>
-    `;
-  }
-
   onInput(event) {
     console.log(this.$root);
     console.log('Formula onInput event:', event.target.textContent.trim());
@@ -27,5 +18,14 @@ export class Formula extends CellsComponent {
   onClick(event) {
     console.log(this.$root);
     console.log('Formula onClick event:', event);
+  }
+
+  toHTML() {
+    return `
+      <div class="info">
+          <div class="fx"></div>
+      </div>
+      <div class="input" contenteditable spellcheck="false"></div>
+    `;
   }
 }
