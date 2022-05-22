@@ -7,20 +7,14 @@ export class Table extends CellsComponent {
   constructor($root) {
     super($root, {
       name: 'Table',
-      listeners: ['click', 'mousedown', 'mouseup'],
+      listeners: ['mousedown'],
     });
   }
 
-  onClick(event) {
-    console.log('Click on table');
-  }
-
   onMousedown(event) {
-    console.log(event.target);
-  }
-
-  onMouseup(event) {
-    console.log('Mouseup on table');
+    if (event.target.dataset.resize) {
+      console.log('Resize:', event.target);
+    }
   }
 
   toHTML() {
