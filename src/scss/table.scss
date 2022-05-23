@@ -27,6 +27,8 @@
     min-width: $row-number-width;
     height: 100%;
     position: relative;
+    user-drag: none;
+    user-select: none;
 
     .row-resize {
       background-color: #4d90fe;

@@ -18,15 +18,20 @@ export class Table extends CellsComponent {
       const $parent = $resizer.closest('[data-type="resizable"]');
       const rect = $parent.getRect();
       const id = $parent.data.col;
+      const resizeType = $resizer.data.resize;
 
-      const cellsToResize = this.$root.findAll(`[data-col="${id}"]`)
-      console.log(id);
+      const cellsToResize = this.$root.findAll(`[data-col="${id}"]`);
 
       document.onmousemove = (e) => {
-        const delta = Math.floor(e.pageX - rect.right);
-        const newWidth = (rect.width + delta) + 'px';
-        $parent.$nativeElement.style.width = newWidth;
-        cellsToResize.forEach((el) => el.style.width = newWidth);
+        if (resizeType === 'col') {
+          const delta = e.pageX - rect.right;
+          const newWidth = Math.floor(rect.width + delta) + 'px';
+          cellsToResize.forEach((el) => el.style.width = newWidth);
+        } else {
+          const delta = e.pageY - rect.bottom;
+          const newHeight = Math.floor(rect.height + delta) + 'px';
+          $parent.css({height: newHeight});
+        }
       };
 
       document.onmouseup = () => {

@@ -49,6 +49,13 @@ class Dom {
   findAll(selector) {
     return this.$nativeElement.querySelectorAll(selector);
   }
+
+  css(styles = {}) {
+    Object.keys(styles)
+        .forEach((key) => {
+          this.$nativeElement.style[key] = styles[key];
+        });
+  }
 }
 
 export function $(selector) {
