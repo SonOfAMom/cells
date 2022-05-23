@@ -17,10 +17,16 @@ export class Table extends CellsComponent {
       const $resizer = $(event.target);
       const $parent = $resizer.closest('[data-type="resizable"]');
       const rect = $parent.getRect();
+      const id = $parent.data.col;
+
+      const cellsToResize = this.$root.findAll(`[data-col="${id}"]`)
+      console.log(id);
 
       document.onmousemove = (e) => {
         const delta = Math.floor(e.pageX - rect.right);
-        $parent.$nativeElement.style.width = (rect.width + delta) + 'px';
+        const newWidth = (rect.width + delta) + 'px';
+        $parent.$nativeElement.style.width = newWidth;
+        cellsToResize.forEach((el) => el.style.width = newWidth);
       };
 
       document.onmouseup = () => {

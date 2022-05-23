@@ -41,6 +41,14 @@ class Dom {
   getRect() {
     return this.$nativeElement.getBoundingClientRect();
   }
+
+  get data() {
+    return this.$nativeElement.dataset;
+  }
+
+  findAll(selector) {
+    return this.$nativeElement.querySelectorAll(selector);
+  }
 }
 
 export function $(selector) {
