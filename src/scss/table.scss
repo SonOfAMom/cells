@@ -31,7 +31,7 @@
     user-select: none;
 
     .row-resize {
-      background-color: #4d90fe;
+      background-color: $resize-line-color;
       bottom: -1px;
       left: -1px;
       opacity: 0;
@@ -41,7 +41,7 @@
 
       &:hover {
         cursor: ns-resize;
-        opacity: 1;
+        opacity: 1 !important;
       }
     }
   }
@@ -67,17 +67,28 @@
     user-select: none;
 
     .col-resize {
-      background: #4d90fe;
+      background: $resize-line-color;
       bottom: -1px;
       opacity: 0;
       position: absolute;
       right: -1px;
       top: 0;
       width: 5px;
+      z-index: 1000;
 
       &:hover {
         cursor: ew-resize;
-        opacity: 1;
+        opacity: 1 !important;
+      }
+
+      &::after {
+        background-color: $resize-line-color;
+        bottom: -1400px;
+        content: '';
+        left: 5px;
+        position: absolute;
+        top: 0;
+        width: 1px;
       }
     }
   }

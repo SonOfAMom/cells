@@ -19,14 +19,16 @@ export class Table extends CellsComponent {
       const rect = $parent.getRect();
       const id = $parent.data.col;
       const resizeType = $resizer.data.resize;
+      let newWidth;
 
+      $resizer.css({opacity: 1});
       const cellsToResize = this.$root.findAll(`[data-col="${id}"]`);
 
       document.onmousemove = (e) => {
         if (resizeType === 'col') {
           const delta = e.pageX - rect.right;
-          const newWidth = Math.floor(rect.width + delta) + 'px';
-          cellsToResize.forEach((el) => el.style.width = newWidth);
+          $resizer.css({right: -delta + 'px'});
+          newWidth = Math.max(Math.floor(rect.width + delta + 1), 0);
         } else {
           const delta = e.pageY - rect.bottom;
           const newHeight = Math.floor(rect.height + delta) + 'px';
@@ -36,6 +38,10 @@ export class Table extends CellsComponent {
 
       document.onmouseup = () => {
         document.onmousemove = null;
+        document.onmouseup = null;
+
+        $resizer.css({opacity: 0, right: '-1px'});
+        cellsToResize.forEach((el) => el.style.width = newWidth + 'px');
       };
     }
   }
