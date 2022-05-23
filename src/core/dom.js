@@ -33,6 +33,14 @@ class Dom {
   off(eventType, callback) {
     this.$nativeElement.removeEventListener(eventType, callback);
   }
+
+  closest(selector) {
+    return $(this.$nativeElement.closest(selector));
+  }
+
+  getRect() {
+    return this.$nativeElement.getBoundingClientRect();
+  }
 }
 
 export function $(selector) {
