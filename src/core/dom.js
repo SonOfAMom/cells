@@ -33,6 +33,37 @@ class Dom {
   off(eventType, callback) {
     this.$nativeElement.removeEventListener(eventType, callback);
   }
+
+  closest(selector) {
+    return $(this.$nativeElement.closest(selector));
+  }
+
+  getRect() {
+    return this.$nativeElement.getBoundingClientRect();
+  }
+
+  get data() {
+    return this.$nativeElement.dataset;
+  }
+
+  findAll(selector) {
+    return this.$nativeElement.querySelectorAll(selector);
+  }
+
+  css(styles = {}) {
+    Object.keys(styles)
+        .forEach((key) => {
+          this.$nativeElement.style[key] = styles[key];
+        });
+  }
+
+  addClass(name) {
+    this.$nativeElement.classList.add(name);
+  }
+
+  removeClass(name) {
+    this.$nativeElement.classList.remove(name);
+  }
 }
 
 export function $(selector) {
