@@ -44,7 +44,7 @@ function fillRow(columnsCount) {
 }
 
 export function createTable(rowsCount) {
-  const columnsCount = 15;
+  const columnsCount = 26;
   const rows = [];
 
   rows.push(createHeader(columnsCount));

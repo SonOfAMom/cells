@@ -56,6 +56,14 @@ class Dom {
           this.$nativeElement.style[key] = styles[key];
         });
   }
+
+  addClass(name) {
+    this.$nativeElement.classList.add(name);
+  }
+
+  removeClass(name) {
+    this.$nativeElement.classList.remove(name);
+  }
 }
 
 export function $(selector) {

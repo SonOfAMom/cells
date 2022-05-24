@@ -38,10 +38,21 @@
       right: -1px;
       height: 5px;
       position: absolute;
+      z-index: 1000;
 
       &:hover {
         cursor: ns-resize;
         opacity: 1 !important;
+      }
+
+      &.active::after {
+        background-color: $resize-line-color;
+        bottom: 0;
+        content: '';
+        right: -2000px;
+        left: 0;
+        height: 1px;
+        position: absolute;
       }
     }
   }
@@ -81,7 +92,7 @@
         opacity: 1 !important;
       }
 
-      &::after {
+      &.active::after {
         background-color: $resize-line-color;
         bottom: -1400px;
         content: '';
