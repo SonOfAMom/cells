@@ -2,6 +2,7 @@ import {tableResizeHandler} from '@/components/table/table.resize';
 import {createTable} from '@/components/table/table.template';
 import {TableSelection} from '@/components/table/TableSelection';
 import {CellsComponent} from '@core/CellsComponent';
+import {$} from '@core/dom';
 
 export class Table extends CellsComponent {
   static className = 'cells__table';
@@ -23,6 +24,8 @@ export class Table extends CellsComponent {
   onMousedown(event) {
     if (event.target.dataset.resize) {
       tableResizeHandler(this.$root, event);
+    } else if (event.target.dataset.id) {
+      this.selection.select($(event.target));
     }
   }
 
