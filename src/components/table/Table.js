@@ -1,5 +1,6 @@
 import {tableResizeHandler} from '@/components/table/table.resize';
 import {createTable} from '@/components/table/table.template';
+import {TableSelection} from '@/components/table/TableSelection';
 import {CellsComponent} from '@core/CellsComponent';
 
 export class Table extends CellsComponent {
@@ -10,6 +11,13 @@ export class Table extends CellsComponent {
       name: 'Table',
       listeners: ['mousedown'],
     });
+  }
+
+  init() {
+    super.init();
+    this.selection = new TableSelection();
+    const $cell = this.$root.find('[data-id="1-0"]');
+    this.selection.select($cell);
   }
 
   onMousedown(event) {

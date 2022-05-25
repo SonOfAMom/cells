@@ -25,10 +25,17 @@ function createRow(data, index = '') {
   `;
 }
 
-function createCell(_, index) {
-  return `
-    <div class="cell" contenteditable data-col="${index}"></div>
-  `;
+function createCell(row) {
+  return (_, col) => {
+    return `
+     <div 
+        class="cell" 
+        contenteditable 
+        data-col="${col}" 
+        data-id="${row}-${col}">
+     </div>
+    `;
+  };
 }
 
 function createHeader(columns) {
@@ -39,8 +46,8 @@ function createHeader(columns) {
   return createRow(header);
 }
 
-function fillRow(columnsCount) {
-  return new Array(columnsCount).fill('').map(createCell).join('');
+function fillRow(columnsCount, row) {
+  return new Array(columnsCount).fill('').map(createCell(row)).join('');
 }
 
 export function createTable(rowsCount) {
@@ -49,8 +56,8 @@ export function createTable(rowsCount) {
 
   rows.push(createHeader(columnsCount));
 
-  for (let i = 1; i <= rowsCount; i++) {
-    rows.push(createRow(fillRow(columnsCount), i));
+  for (let row = 1; row <= rowsCount; row++) {
+    rows.push(createRow(fillRow(columnsCount, row), row));
   }
 
   return rows.join('');

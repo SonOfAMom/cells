@@ -46,6 +46,10 @@ class Dom {
     return this.$nativeElement.dataset;
   }
 
+  find(selector) {
+    return $(this.$nativeElement.querySelector(selector));
+  }
+
   findAll(selector) {
     return this.$nativeElement.querySelectorAll(selector);
   }
