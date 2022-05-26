@@ -68,6 +68,14 @@ class Dom {
   removeClass(name) {
     this.$nativeElement.classList.remove(name);
   }
+
+  id() {
+    const parsed = this.data.id.split('-');
+    return {
+      row: +parsed[0],
+      col: +parsed[1],
+    };
+  }
 }
 
 export function $(selector) {

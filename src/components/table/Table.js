@@ -1,5 +1,6 @@
 import {tableResizeHandler} from '@/components/table/table.resize';
 import {createTable} from '@/components/table/table.template';
+import {matrix} from '@/components/table/table.utils';
 import {TableSelection} from '@/components/table/TableSelection';
 import {CellsComponent} from '@core/CellsComponent';
 import {$} from '@core/dom';
@@ -25,7 +26,15 @@ export class Table extends CellsComponent {
     if (event.target.dataset.resize) {
       tableResizeHandler(this.$root, event);
     } else if (event.target.dataset.id) {
-      this.selection.select($(event.target));
+      const $target = $(event.target);
+      if (event.shiftKey) {
+        const $cells = matrix(this.selection.$current, $target)
+            .map((id) => this.$root.find(`[data-id="${id}"]`));
+
+        this.selection.selectGroup($cells);
+      } else {
+        this.selection.select($target);
+      }
     }
   }
 
