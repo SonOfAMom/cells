@@ -79,6 +79,10 @@ class Dom {
     }
     return this.data.id;
   }
+
+  focus() {
+    this.$nativeElement.focus();
+  }
 }
 
 export function $(selector) {

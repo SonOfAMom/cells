@@ -1,5 +1,6 @@
 export class TableSelection {
   static selectedClass = 'selected'
+  static currentClass = 'current'
 
   constructor() {
     this.group = [];
@@ -7,14 +8,15 @@ export class TableSelection {
   }
 
   select($el) {
-    this.clearGroup();
     this.group.push($el);
-    $el.addClass(TableSelection.selectedClass);
     this.$current = $el;
+    this.$current.addClass(TableSelection.currentClass);
+    this.$current.addClass(TableSelection.selectedClass);
   }
 
-  selectGroup($cells = []) {
-    this.clearGroup();
+  selectGroup($cells = [], $current) {
+    this.clearAll();
+    this.select($current);
     this.group = $cells;
     this.group.forEach(($el) => $el.addClass(TableSelection.selectedClass));
   }
@@ -22,5 +24,16 @@ export class TableSelection {
   clearGroup() {
     this.group.forEach(($el) => $el.removeClass(TableSelection.selectedClass));
     this.group = [];
+  }
+
+  clearCurrent() {
+    if (this.$current) {
+      this.$current.removeClass(TableSelection.currentClass);
+    }
+  }
+
+  clearAll() {
+    this.clearCurrent();
+    this.clearGroup();
   }
 }

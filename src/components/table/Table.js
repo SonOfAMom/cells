@@ -1,10 +1,10 @@
-import {tableGroupSelect} from '@/components/table/table.groupSelect';
+// eslint-disable-next-line max-len
+import {keyShiftSelection, mouseSelect} from '@/components/table/table.selectionTypes';
 import {tableResizeHandler} from '@/components/table/table.resize';
 import {createTable} from '@/components/table/table.template';
-import {isCell, matrix} from '@/components/table/table.utils';
+import {isCell} from '@/components/table/table.utils';
 import {TableSelection} from '@/components/table/TableSelection';
 import {CellsComponent} from '@core/CellsComponent';
-import {$} from '@core/dom';
 
 export class Table extends CellsComponent {
   static className = 'cells__table';
@@ -19,22 +19,16 @@ export class Table extends CellsComponent {
   init() {
     super.init();
     this.selection = new TableSelection();
-    const $cell = this.$root.find('[data-id="1-0"]');
-    this.selection.select($cell);
   }
 
   onMousedown(event) {
     if (event.target.dataset.resize) {
       tableResizeHandler(this.$root, event);
     } else if ( isCell(event) ) {
-      const $target = $(event.target);
       if (event.shiftKey) {
-        const $cells = matrix(this.selection.$current, $target)
-            .map((id) => this.$root.find(`[data-id="${id}"]`));
-
-        this.selection.selectGroup($cells);
+        keyShiftSelection(this.$root, event, this.selection);
       } else {
-        tableGroupSelect(this.$root, event, this.selection);
+        mouseSelect(this.$root, event, this.selection);
       }
     }
   }
