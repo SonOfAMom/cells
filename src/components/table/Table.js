@@ -1,6 +1,7 @@
+import {tableGroupSelect} from '@/components/table/table.groupSelect';
 import {tableResizeHandler} from '@/components/table/table.resize';
 import {createTable} from '@/components/table/table.template';
-import {matrix} from '@/components/table/table.utils';
+import {isCell, matrix} from '@/components/table/table.utils';
 import {TableSelection} from '@/components/table/TableSelection';
 import {CellsComponent} from '@core/CellsComponent';
 import {$} from '@core/dom';
@@ -25,7 +26,7 @@ export class Table extends CellsComponent {
   onMousedown(event) {
     if (event.target.dataset.resize) {
       tableResizeHandler(this.$root, event);
-    } else if (event.target.dataset.id) {
+    } else if ( isCell(event) ) {
       const $target = $(event.target);
       if (event.shiftKey) {
         const $cells = matrix(this.selection.$current, $target)
@@ -33,7 +34,7 @@ export class Table extends CellsComponent {
 
         this.selection.selectGroup($cells);
       } else {
-        this.selection.select($target);
+        tableGroupSelect(this.$root, event, this.selection);
       }
     }
   }
