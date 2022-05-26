@@ -8,10 +8,14 @@ export class TableSelection {
   }
 
   select($el) {
+    this.clearAll();
     this.group.push($el);
     this.$current = $el;
-    this.$current.addClass(TableSelection.currentClass);
-    this.$current.addClass(TableSelection.selectedClass);
+    this.$current.addClass(
+        TableSelection.currentClass,
+        TableSelection.selectedClass
+    );
+    this.$current.focus();
   }
 
   selectGroup($cells = [], $current) {

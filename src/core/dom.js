@@ -61,12 +61,12 @@ class Dom {
         });
   }
 
-  addClass(name) {
-    this.$nativeElement.classList.add(name);
+  addClass(...classNames) {
+    this.$nativeElement.classList.add(...classNames);
   }
 
-  removeClass(name) {
-    this.$nativeElement.classList.remove(name);
+  removeClass(...classNames) {
+    this.$nativeElement.classList.remove(...classNames);
   }
 
   id(parse) {

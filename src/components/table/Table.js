@@ -12,13 +12,17 @@ export class Table extends CellsComponent {
   constructor($root) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown'],
+      listeners: ['mousedown', 'keydown'],
     });
   }
 
   init() {
     super.init();
     this.selection = new TableSelection();
+  }
+
+  toHTML() {
+    return createTable(50);
   }
 
   onMousedown(event) {
@@ -33,7 +37,46 @@ export class Table extends CellsComponent {
     }
   }
 
-  toHTML() {
-    return createTable(50);
+  onKeydown(event) {
+    const keys = [
+      'Enter',
+      'Tab',
+      'ArrowUp',
+      'ArrowRight',
+      'ArrowDown',
+      'ArrowLeft',
+    ];
+    const {key} = event;
+
+    if ( keys.includes(key) && !event.shiftKey ) {
+      event.preventDefault();
+      const id = this.selection.$current.id(true);
+      const $next = this.$root.find(nextCell(key, id));
+      this.selection.select($next);
+    }
   }
+}
+
+function nextCell(key, {row, col}) {
+  const TOP_BORDER = 1;
+  const LEFT_BORDER = 0;
+  const RIGHT_BORDER = 25;
+  const BOTTOM_BORDER = 50;
+  switch (key) {
+    case 'Enter':
+    case 'ArrowDown':
+      row = row + 1 > BOTTOM_BORDER ? BOTTOM_BORDER : row + 1;
+      break;
+    case 'Tab':
+    case 'ArrowRight':
+      col = col + 1 > RIGHT_BORDER ? RIGHT_BORDER : col + 1;
+      break;
+    case 'ArrowUp':
+      row = row - 1 < TOP_BORDER ? TOP_BORDER : row - 1;
+      break;
+    case 'ArrowLeft':
+      col = col - 1 < LEFT_BORDER ? LEFT_BORDER : col - 1;
+      break;
+  }
+  return `[data-id="${row}-${col}"]`;
 }
