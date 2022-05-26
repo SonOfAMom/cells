@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-len
-import {keyShiftSelection, mouseSelect} from '@/components/table/table.selectionTypes';
+import {keyShiftSelection, mouseSelect, nextCell} from '@/components/table/table.selectionTypes';
 import {tableResizeHandler} from '@/components/table/table.resize';
 import {createTable} from '@/components/table/table.template';
 import {isCell} from '@/components/table/table.utils';
@@ -55,28 +55,4 @@ export class Table extends CellsComponent {
       this.selection.select($next);
     }
   }
-}
-
-function nextCell(key, {row, col}) {
-  const TOP_BORDER = 1;
-  const LEFT_BORDER = 0;
-  const RIGHT_BORDER = 25;
-  const BOTTOM_BORDER = 50;
-  switch (key) {
-    case 'Enter':
-    case 'ArrowDown':
-      row = row + 1 > BOTTOM_BORDER ? BOTTOM_BORDER : row + 1;
-      break;
-    case 'Tab':
-    case 'ArrowRight':
-      col = col + 1 > RIGHT_BORDER ? RIGHT_BORDER : col + 1;
-      break;
-    case 'ArrowUp':
-      row = row - 1 < TOP_BORDER ? TOP_BORDER : row - 1;
-      break;
-    case 'ArrowLeft':
-      col = col - 1 < LEFT_BORDER ? LEFT_BORDER : col - 1;
-      break;
-  }
-  return `[data-id="${row}-${col}"]`;
 }
