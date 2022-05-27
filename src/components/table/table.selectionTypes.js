@@ -23,6 +23,8 @@ export function mouseSelect($root, event, selection) {
     document.onmousemove = null;
     document.onmouseup = null;
   };
+
+  return $start;
 }
 
 export function keyShiftSelection($root, event, selection) {
