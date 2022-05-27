@@ -13,6 +13,10 @@ class Dom {
     return this.$nativeElement.innerHTML;
   }
 
+  text(text) {
+    this.$nativeElement.textContent = text;
+  }
+
   clear() {
     this.html('');
     return this;

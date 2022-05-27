@@ -9,16 +9,20 @@ import {CellsComponent} from '@core/CellsComponent';
 export class Table extends CellsComponent {
   static className = 'cells__table';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Table',
       listeners: ['mousedown', 'keydown'],
+      ...options,
     });
   }
 
   init() {
     super.init();
     this.selection = new TableSelection();
+    this.$on('formula:input', (text) => {
+      this.selection.$current.text(text);
+    });
   }
 
   toHTML() {
@@ -54,5 +58,9 @@ export class Table extends CellsComponent {
       const $next = this.$root.find(nextCell(key, id));
       this.selection.select($next);
     }
+  }
+
+  destroy() {
+    super.destroy();
   }
 }
