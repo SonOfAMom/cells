@@ -3,16 +3,12 @@ import {CellsComponent} from '@core/CellsComponent';
 export class Toolbar extends CellsComponent {
   static className = 'cells__toolbar';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Toolbar',
-      listeners: ['click'],
+      listeners: [],
+      ...options,
     });
-  }
-
-  onClick(event) {
-    console.log(this.$root);
-    console.log('Toolbar onClick event:', event.target);
   }
 
   toHTML() {

@@ -1,23 +1,39 @@
 import {CellsComponent} from '@core/CellsComponent';
+import {$} from '@core/dom';
 
 export class Formula extends CellsComponent {
   static className = 'cells__formula';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: ['input', 'click'],
+      listeners: ['input', 'keydown'],
+      ...options,
     });
   }
 
-  onInput(event) {
-    console.log(this.$root);
-    console.log('Formula onInput event:', event.target.textContent.trim());
+  init() {
+    super.init();
+
+    const $formula = this.$root.find('#formula');
+    this.$on('table:current-changed', ($current) => {
+      $formula.text($current.text());
+    });
+
+    this.$on('table:input', (text) => $formula.text(text));
   }
 
-  onClick(event) {
-    console.log(this.$root);
-    console.log('Formula onClick event:', event);
+  onInput(event) {
+    this.$emit('formula:input', $(event.target).text());
+  }
+
+  onKeydown(event) {
+    const {key} = event;
+    const keys = ['Enter', 'Tab'];
+    if (keys.includes(key)) {
+      event.preventDefault();
+      this.$emit('formula:special-key', key);
+    }
   }
 
   toHTML() {
@@ -25,7 +41,12 @@ export class Formula extends CellsComponent {
       <div class="info">
           <div class="fx"></div>
       </div>
-      <div class="input" contenteditable spellcheck="false"></div>
+      <div 
+        id="formula" 
+        class="input" 
+        contenteditable 
+        spellcheck="false"
+      ></div>
     `;
   }
 }

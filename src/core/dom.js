@@ -13,6 +13,14 @@ class Dom {
     return this.$nativeElement.innerHTML;
   }
 
+  text(text) {
+    if (typeof text === 'string') {
+      this.$nativeElement.textContent = text;
+      return this;
+    }
+    return this.$nativeElement.textContent.trim();
+  }
+
   clear() {
     this.html('');
     return this;
@@ -46,6 +54,10 @@ class Dom {
     return this.$nativeElement.dataset;
   }
 
+  find(selector) {
+    return $(this.$nativeElement.querySelector(selector));
+  }
+
   findAll(selector) {
     return this.$nativeElement.querySelectorAll(selector);
   }
@@ -57,12 +69,27 @@ class Dom {
         });
   }
 
-  addClass(name) {
-    this.$nativeElement.classList.add(name);
+  addClass(...classNames) {
+    this.$nativeElement.classList.add(...classNames);
   }
 
-  removeClass(name) {
-    this.$nativeElement.classList.remove(name);
+  removeClass(...classNames) {
+    this.$nativeElement.classList.remove(...classNames);
+  }
+
+  id(parse) {
+    if (parse) {
+      const parsed = this.data.id.split('-');
+      return {
+        row: +parsed[0],
+        col: +parsed[1],
+      };
+    }
+    return this.data.id;
+  }
+
+  focus() {
+    this.$nativeElement.focus();
   }
 }
 
