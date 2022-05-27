@@ -29,15 +29,3 @@ export class Emitter {
     };
   }
 }
-
-// Tests
-// const emitter = new Emitter();
-// const unsubscribe = emitter.subscribe(
-//     'hello-said',
-//     (name) => console.log(`${name} said Hello.`)
-// );
-// setTimeout(() => emitter.emit('hello-said', 'John'), 3000);
-// emitter.emit('non-existent-event');
-// emitter.emit('hello-said', 'Max');
-// unsubscribe();
-// emitter.emit('hello-said', 'Mark');

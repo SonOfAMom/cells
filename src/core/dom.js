@@ -14,7 +14,11 @@ class Dom {
   }
 
   text(text) {
-    this.$nativeElement.textContent = text;
+    if (typeof text === 'string') {
+      this.$nativeElement.textContent = text;
+      return this;
+    }
+    return this.$nativeElement.textContent.trim();
   }
 
   clear() {

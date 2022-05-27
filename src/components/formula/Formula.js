@@ -1,4 +1,5 @@
 import {CellsComponent} from '@core/CellsComponent';
+import {$} from '@core/dom';
 
 export class Formula extends CellsComponent {
   static className = 'cells__formula';
@@ -6,14 +7,33 @@ export class Formula extends CellsComponent {
   constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: ['input'],
+      listeners: ['input', 'keydown'],
       ...options,
     });
   }
 
+  init() {
+    super.init();
+
+    const $formula = this.$root.find('#formula');
+    this.$on('table:current-changed', ($current) => {
+      $formula.text($current.text());
+    });
+
+    this.$on('table:input', (text) => $formula.text(text));
+  }
+
   onInput(event) {
-    const text = event.target.textContent.trim();
-    this.$emit('formula:input', text);
+    this.$emit('formula:input', $(event.target).text());
+  }
+
+  onKeydown(event) {
+    const {key} = event;
+    const keys = ['Enter', 'Tab'];
+    if (keys.includes(key)) {
+      event.preventDefault();
+      this.$emit('formula:special-key', key);
+    }
   }
 
   toHTML() {
@@ -21,7 +41,12 @@ export class Formula extends CellsComponent {
       <div class="info">
           <div class="fx"></div>
       </div>
-      <div class="input" contenteditable spellcheck="false"></div>
+      <div 
+        id="formula" 
+        class="input" 
+        contenteditable 
+        spellcheck="false"
+      ></div>
     `;
   }
 }

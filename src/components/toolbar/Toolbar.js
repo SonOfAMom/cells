@@ -6,14 +6,9 @@ export class Toolbar extends CellsComponent {
   constructor($root, options) {
     super($root, {
       name: 'Toolbar',
-      listeners: ['click'],
+      listeners: [],
       ...options,
     });
-  }
-
-  onClick(event) {
-    console.log(this.$root);
-    console.log('Toolbar onClick event:', event.target);
   }
 
   toHTML() {

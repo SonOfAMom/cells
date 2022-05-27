@@ -5,6 +5,7 @@ import {createTable} from '@/components/table/table.template';
 import {isCell} from '@/components/table/table.utils';
 import {TableSelection} from '@/components/table/TableSelection';
 import {CellsComponent} from '@core/CellsComponent';
+import {$} from '@core/dom';
 
 export class Table extends CellsComponent {
   static className = 'cells__table';
@@ -12,7 +13,7 @@ export class Table extends CellsComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown'],
+      listeners: ['mousedown', 'keydown', 'input'],
       ...options,
     });
   }
@@ -20,13 +21,28 @@ export class Table extends CellsComponent {
   init() {
     super.init();
     this.selection = new TableSelection();
+
+    const $firstCell = this.$root.find('[data-id="1-0"]');
+    this.selectCell($firstCell);
+
     this.$on('formula:input', (text) => {
       this.selection.$current.text(text);
+    });
+
+    this.$on('formula:special-key', (key) => {
+      const id = this.selection.$current.id(true);
+      const $next = this.$root.find(nextCell(key, id));
+      this.selectCell($next);
     });
   }
 
   toHTML() {
     return createTable(50);
+  }
+
+  selectCell($cell) {
+    this.selection.select($cell);
+    this.$emit('table:current-changed', $cell);
   }
 
   onMousedown(event) {
@@ -56,8 +72,12 @@ export class Table extends CellsComponent {
       event.preventDefault();
       const id = this.selection.$current.id(true);
       const $next = this.$root.find(nextCell(key, id));
-      this.selection.select($next);
+      this.selectCell($next);
     }
+  }
+
+  onInput(event) {
+    this.$emit('table:input', $(event.target).text());
   }
 
   destroy() {
