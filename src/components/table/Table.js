@@ -52,7 +52,8 @@ export class Table extends CellsComponent {
       if (event.shiftKey) {
         keyShiftSelection(this.$root, event, this.selection);
       } else {
-        mouseSelect(this.$root, event, this.selection);
+        const $current = mouseSelect(this.$root, event, this.selection);
+        this.$emit('table:current-changed', $current);
       }
     }
   }
